@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./App.css"
 
 
 function App() {
 
-
+  const [isComplete, setIsComplete] = useState(false)
 
   return (
     <div className="app">
@@ -30,8 +30,10 @@ function App() {
         </div>
 
       <div className='btn-area'>
-        <button>todos</button>
-        <button>Completed</button>
+        <button className={`secondaryBtn ${isComplete === false && 'active'} `}
+        onClick={() => setIsComplete(true)}>todos</button>
+        <button className={`secondaryBtn ${isComplete === true && 'active'} `}
+        onClick={() => setIsComplete(false)}>Completed</button>
       </div>
 
       <div className='todo-lists'>
