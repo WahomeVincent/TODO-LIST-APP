@@ -1,49 +1,46 @@
-import React, { useState } from 'react';
-import './App.css';
+import React from 'react';
+import "./App.css"
+
 
 function App() {
 
-  const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState("");
 
-  function addTodo(todo) {
-    const newTodo = {
-      id: Math.random(),
-      todo : todo
-    }
-
-    // Add Todos to my list
-    setTodos([...todos, newTodo])
-
-    // Clear my List
-    setInput('')
-
-  }
-
-  function deleteTodo() {
-    
-  }
 
   return (
-    <div className="App">
-      <h1 className='header'>My Todo List</h1>
-      <input 
-        type='text'
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <button onClick={() => addTodo(input)}>
-        Add task
-      </button>
-      <ul>
-       {todos.map((todo) => (
-        <li key={todo.id}>
-          {todo.todo}
-          <button onClick={deleteTodo}>&times;</button>
-        </li>
-        
-       ))}
-      </ul>
+    <div className="app">
+      <div>
+        <h1>My Todos</h1>
+      </div>
+      <div className='todo-wrapper'>
+        <div className='todo-input'>
+          <div className='todo-item'>
+            <label>Title</label>
+            <input type='text' placeholder='Input your title here'/>
+          </div>
+
+          <div className='todo-item'>
+            <label>Description</label>
+            <input type='text' placeholder='Input your description here'/>
+          </div>
+
+          <div className='todo-item'>
+            <button type='button' className='primaryBtn'>Add todo</button>
+          </div>
+          
+        </div>
+
+      <div className='btn-area'>
+        <button>todos</button>
+        <button>Completed</button>
+      </div>
+
+      <div className='todo-lists'>
+        <p>Todo lists</p>
+        <p>Content 1</p>
+      </div>
+
+      </div>
+      
     </div>
   );
 }
