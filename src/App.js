@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import "./App.css"
 
+import {AiFillDelete} from 'react-icons/ai'
+import {BsCheckLg} from 'react-icons/bs'
+
 
 function App() {
 
@@ -30,17 +33,28 @@ function App() {
         </div>
 
       <div className='btn-area'>
+        {/* Sets the classname of the button based on the state of the variable */}
         <button className={`secondaryBtn ${isComplete === false && 'active'} `}
-        onClick={() => setIsComplete(true)}>todos</button>
+        onClick={() => setIsComplete(false)}>todos</button>
         <button className={`secondaryBtn ${isComplete === true && 'active'} `}
-        onClick={() => setIsComplete(false)}>Completed</button>
+        onClick={() => setIsComplete(true)}>Completed</button>
       </div>
 
-      <div className='todo-lists'>
-        <p>Todo lists</p>
-        <p>Content 1</p>
-      </div>
-
+      <div className='todo-list'>
+        <div className='todo-list-item'>
+          <div>
+            <h3>Todo lists</h3>
+            <p>Content 1</p>
+          </div>
+          <div>
+            <AiFillDelete className='delete-icon'/>
+            <BsCheckLg className='check-icon'/>
+          </div>
+        </div>
+        
+        
+      </div >
+        
       </div>
       
     </div>
