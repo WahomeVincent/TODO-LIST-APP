@@ -84,7 +84,7 @@ h1{
 .todo-list {
     display: flex;
     flex-direction: column;
-    box-shadow: 3px 3px 3px #776863;
+    /* box-shadow: 3px 3px 3px #776863; */
     
 
 }

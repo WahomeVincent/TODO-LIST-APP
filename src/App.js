@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./App.css"
 
 import {AiFillDelete} from 'react-icons/ai'
 import {BsCheckLg} from 'react-icons/bs'
-import { logRoles } from '@testing-library/react';
+// import { logRoles } from '@testing-library/react';
 
 
 function App() {
@@ -24,6 +24,8 @@ function App() {
 
     updatedArray.push(newTodo);
     setAllTodos(updatedArray)
+    // Saving the data to localstorage so that wheh the page is refreshed the data remains.
+    localStorage.setItem('todolist', JSON.stringify(updatedArray)) 
 
    
     // Clears the Title field
@@ -31,6 +33,18 @@ function App() {
     // Clears the Description field
     setNewDescription('')
   }
+
+  // Saving the data to localstorage so that wheh the page is refreshed the data remains.
+
+  useEffect(()=>{
+    let savedTodos = JSON.parse(localStorage.getItem('todolist'))
+    // JSON.parse is used to convert the data back to an array.
+
+    if(savedTodos){
+      setAllTodos(savedTodos)
+    }
+
+  },[])
 
 
   return (
