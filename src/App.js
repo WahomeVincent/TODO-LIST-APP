@@ -34,6 +34,16 @@ function App() {
     setNewDescription('')
   }
 
+  function handleDelete(index) {
+    let reducedTodos = [...allTodos];
+
+    // Take allTodos and remove 1 element at the said index.
+    reducedTodos.splice(index, 1); 
+
+    localStorage.setItem('todolist',JSON.stringify(reducedTodos))
+    setAllTodos(reducedTodos)
+  }
+
   // Saving the data to localstorage so that wheh the page is refreshed the data remains.
 
   useEffect(()=>{
@@ -45,6 +55,8 @@ function App() {
     }
 
   },[])
+
+  
 
 
   return (
@@ -95,7 +107,7 @@ function App() {
             <p>{item.description}   </p>
           </div>
           <div>
-            <AiFillDelete className='delete-icon'/>
+            <AiFillDelete className='delete-icon' onClick={handleDelete}/>
             <BsCheckLg className='check-icon'/>
           </div>
         </div>
