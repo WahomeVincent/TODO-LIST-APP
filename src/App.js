@@ -66,13 +66,15 @@ function App() {
       completedOn:completedOn
     }
 
-    console.log(filteredItem);
+ 
 
     let updatedCompletedArray = [...completedTodos]
     updatedCompletedArray.push(filteredItem)
 
     localStorage.setItem('completed-todos', JSON.stringify(updatedCompletedArray))
     setCompletedTodos(updatedCompletedArray) 
+    // Deletes the Completed item from the 'todos list'
+    handleDelete(index)
     
 
   }
