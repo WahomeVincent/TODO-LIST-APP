@@ -12,6 +12,9 @@ function App() {
   const [allTodos, setAllTodos] = useState([]);
   const [newTitle, setNewTitle] = useState('');
   const [newDescription, setNewDescription] = useState('');
+  const [completedTodos, setCompletedTodos] = useState([]);
+
+  
 
   function handleAddTodo() {
 
@@ -25,7 +28,8 @@ function App() {
     updatedArray.push(newTodo);
     setAllTodos(updatedArray)
     // Saving the data to localstorage so that wheh the page is refreshed the data remains.
-    localStorage.setItem('todolist', JSON.stringify(updatedArray)) 
+    localStorage.setItem('todolist', JSON.stringify(updatedArray))
+   
 
    
     // Clears the Title field
@@ -42,6 +46,35 @@ function App() {
 
     localStorage.setItem('todolist',JSON.stringify(reducedTodos))
     setAllTodos(reducedTodos)
+   
+  }
+
+  function handleCompleteTodos (index) {
+
+    let now = new Date();
+    let day = now.getDate();
+    let month = now.getMonth() + 1 ;
+    let year = now.getFullYear();
+    let hour = now.getHours();
+    let minutes = now.getMinutes();
+    // let seconds = now.getSeconds();
+    
+    let completedOn = day + '-' + month + '-' + year + ' at ' + hour + ':' + minutes + ' hours' 
+
+    let filteredItem = {
+      ...allTodos[index],
+      completedOn:completedOn
+    }
+
+    console.log(filteredItem);
+
+    let updatedCompletedArray = [...completedTodos]
+    updatedCompletedArray.push(filteredItem)
+
+    localStorage.setItem('completed-todos', JSON.stringify(updatedCompletedArray))
+    setCompletedTodos(updatedCompletedArray) 
+    
+
   }
 
   // Saving the data to localstorage so that wheh the page is refreshed the data remains.
@@ -72,6 +105,7 @@ function App() {
               placeholder='Input your title here'
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
+              
               />
           </div>
 
@@ -81,6 +115,7 @@ function App() {
               placeholder='Input your description here'
               value={newDescription}
               onChange={(e) => setNewDescription(e.target.value)}
+              
             />
           </div>
 
@@ -99,7 +134,7 @@ function App() {
       </div>
 
       <div className='todo-list'>
-       {allTodos.map((item, index) => {
+       {isComplete === false && allTodos.map((item, index) => {
         return (
           <div className='todo-list-item' key={index}>
           <div>
@@ -107,8 +142,24 @@ function App() {
             <p>{item.description}   </p>
           </div>
           <div>
+            <AiFillDelete className='delete-icon' onClick={() => handleDelete(index)}/>
+            <BsCheckLg className='check-icon' onClick={() =>  handleCompleteTodos(index)}/>
+          </div>
+        </div>
+        )
+       })}
+
+      {isComplete === true && completedTodos.map((item, index) => {
+        return (
+          <div className='todo-list-item' key={index}>
+          <div>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+            <p><small>Completed on:{item.completedOn}</small></p>
+          </div>
+          <div>
             <AiFillDelete className='delete-icon' onClick={handleDelete}/>
-            <BsCheckLg className='check-icon'/>
+            {/* <BsCheckLg className='check-icon' onClick={handleCompleteTodos}/> */}
           </div>
         </div>
         )
