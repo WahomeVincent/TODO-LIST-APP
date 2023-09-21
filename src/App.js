@@ -76,7 +76,15 @@ function App() {
 
   }
 
-  
+  function handleDeleteCompleted (index) {
+    let reducedTodos = [...completedTodos]
+
+    reducedTodos.splice(index, 1);
+
+    localStorage.setItem('todolist',JSON.stringify(reducedTodos))
+
+    setCompletedTodos(reducedTodos)
+  }
 
   // Saving the data to localstorage so that wheh the page is refreshed the data remains.
 
@@ -161,8 +169,7 @@ function App() {
             <p><small>Completed on: {item.completedOn}</small></p>
           </div>
           <div>
-            <AiFillDelete className='delete-icon' />
-            {/* <BsCheckLg className='check-icon' onClick={handleCompleteTodos}/> */}
+            <AiFillDelete className='delete-icon' onClick={() => handleDeleteCompleted(index)}/>
           </div>
         </div>
         )
