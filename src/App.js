@@ -59,40 +59,41 @@ function App() {
     let minutes = now.getMinutes();
     // let seconds = now.getSeconds();
     
-    let completedOn = day + '-' + month + '-' + year + ' at ' + hour + ':' + minutes + ' hours' 
+    let completedOn = day + '-' + month + '-' + year + ' at ' + hour + ':' + minutes
 
     let filteredItem = {
       ...allTodos[index],
       completedOn:completedOn
     }
 
- 
-
     let updatedCompletedArray = [...completedTodos]
     updatedCompletedArray.push(filteredItem)
 
-    localStorage.setItem('completed-todos', JSON.stringify(updatedCompletedArray))
     setCompletedTodos(updatedCompletedArray) 
     // Deletes the Completed item from the 'todos list'
     handleDelete(index)
-    
+    localStorage.setItem('completed-todos', JSON.stringify(updatedCompletedArray))
 
   }
+
+  
 
   // Saving the data to localstorage so that wheh the page is refreshed the data remains.
 
   useEffect(()=>{
+     // JSON.parse is used to convert the data back to an array.
     let savedTodos = JSON.parse(localStorage.getItem('todolist'))
-    // JSON.parse is used to convert the data back to an array.
+    let savedCompletedTodos = JSON.parse(localStorage.getItem('completed-todos'))
 
     if(savedTodos){
       setAllTodos(savedTodos)
     }
 
+    if(savedCompletedTodos){
+      setCompletedTodos(savedCompletedTodos)
+    }
+
   },[])
-
-  
-
 
   return (
     <div className="app">
@@ -157,10 +158,10 @@ function App() {
           <div>
             <h3>{item.title}</h3>
             <p>{item.description}</p>
-            <p><small>Completed on:{item.completedOn}</small></p>
+            <p><small>Completed on: {item.completedOn}</small></p>
           </div>
           <div>
-            <AiFillDelete className='delete-icon' onClick={handleDelete}/>
+            <AiFillDelete className='delete-icon' />
             {/* <BsCheckLg className='check-icon' onClick={handleCompleteTodos}/> */}
           </div>
         </div>
