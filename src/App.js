@@ -81,7 +81,7 @@ function App() {
 
     reducedTodos.splice(index, 1);
 
-    localStorage.setItem('todolist',JSON.stringify(reducedTodos))
+    localStorage.setItem('completed-todos',JSON.stringify(reducedTodos))
 
     setCompletedTodos(reducedTodos)
   }
